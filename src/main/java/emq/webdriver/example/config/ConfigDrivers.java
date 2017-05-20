@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 /**
- * This class contains the configuration for the different webdrivers, which can be used for the tests
+ * Diese Klasse beinhaltet die Konfigurationen für die jeweiligen Webdriver
  * 
  * @author Marc Philipp Marcinkowski
  */
@@ -15,8 +15,8 @@ public class ConfigDrivers {
 	private WebDriver driver;
 
 	/**
-	 * configurating the firefox webdriver
-	 * @return the configurated firefox webdriver
+	 * Konfiguriert den Webdriver für firefox
+	 * @return Den konfigurierten Firefox Webdriver
 	 */
 	public WebDriver getFirefox() {
 		System.setProperty("webdriver.gecko.driver", "target\\resources\\geckodriver.exe");
@@ -24,8 +24,8 @@ public class ConfigDrivers {
 	}
 	
 	/**
-	 * configurating the chrome webdriver
-	 * @return the configurated chrome webdriver
+	 * Konfiguriert den Webdriver für Google Chrome
+	 * @return Den konfigurierten Google Chrome Webdriver
 	 */
 	public WebDriver getChrome() {
 		System.setProperty("webdriver.chrome.driver", "target\\resources\\chromedriver.exe");

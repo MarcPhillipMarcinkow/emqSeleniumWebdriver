@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Pageobject für die Registrierung
+ * Diese Klasse ist das Pageobject für die Registrierung
  * 
  * @author Marc Philipp Marcinkowski
  *

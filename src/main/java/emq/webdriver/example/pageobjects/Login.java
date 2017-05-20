@@ -34,16 +34,16 @@ public class Login {
 	}
 
 	/**
-	 * Opens the login page
+	 * Öffnet die Login Seite
 	 */
 	public void openPage() {
 		driver.navigate().to("https://onlinechilishop.de/login/");
 	}
 
 	/**
-	 * fills the fomular from the login
-	 * @param loginEmail email
-	 * @param loginPassword password
+	 * Füllt das Loginformular 
+	 * @param loginEmail Email des Benutzers
+	 * @param loginPassword Password des Benutzers
 	 */
 	public void login(String loginEmail, String loginPassword) {
 		email.sendKeys(loginEmail);
@@ -52,23 +52,23 @@ public class Login {
 	}
 
 	/**
-	 * logout
+	 * Navigiert zum Logout 
 	 */
 	public void logout() {
 		driver.navigate().to("https://onlinechilishop.de/login/?logout");
 	}
 
 	/**
-	 * get the successful alert message in the login formular
-	 * @return
+	 * Bekomme die erfolgreiche Nachricht im Loginformular, welche mit grüner Schrift dargestellt wird
+	 * @return Gibt die erfolgreiche Nachricht des Logins zurück
 	 */
 	public String getSuccessAlertMessage() {
 		return driver.findElement(By.className("alert-success")).getText();
 	}
 	
 	/**
-	 * get the danger alert message in the login formular
-	 * @return
+	 * Bekomme die nicht erfolgreiche Nachricht im Loginformular, welche mit roter Schrift dargestellt wird
+	 * @return Gibt die nicht erfolgreiche Nachricht des Logins zurück
 	 */
 	public String getDangerAlertMessage() {
 		return driver.findElement(By.className("alert-danger")).getText();

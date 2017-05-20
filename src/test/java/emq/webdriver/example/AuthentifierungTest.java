@@ -7,13 +7,18 @@ import emq.webdriver.example.pageobjects.Login;
 import emq.webdriver.example.pageobjects.MainPage;
 import emq.webdriver.example.pageobjects.Registration;
 
+/**
+ * Diese Klasse beinhaltet die Testfälle für die Authentifizierung
+ * @author Marc
+ *
+ */
 public class AuthentifierungTest extends AbstractEMQ {
 
 	//  Pageobject for the main page
 	MainPage mp = new MainPage(driver);
 	
 	/*
-	 * temporary disabled, we dont need more accounts... 
+	 * Temporär deaktiviert, da schon viele Test-Accounts erstellt wurden
 	 */
 	// @Test
 	public void registration() {
@@ -24,6 +29,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 		reg.fillRegistrationForm();
 	}
 
+	
 	@Test
 	public void login() {
 		mp.openPage();
@@ -32,27 +38,27 @@ public class AuthentifierungTest extends AbstractEMQ {
 		login.openPage();
 		
 		/**
-		 * login with wrong data
+		 * Login mit falschen Daten
 		 */
 		
 		login.login("asdf", "aas2fds");
 		Assert.assertTrue(login.getDangerAlertMessage().contains("Ungültige Zugangsdaten."));
 		
 		/**
-		 * login with right data
+		 * Login mit richtigen Daten
 		 */
 		
 		login.login("MaxMustermann@discardmail.com", "Max");
 
 		/*
-		 * checks if the login was successful by checking the redirect
+		 * Überprüft ob der Login erfolgreich war in dem der redirekt funktionierte
 		 */
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://onlinechilishop.de/customer/"));
 		
 		login.logout();
 		
 		/*
-		 * checks if the logout was successful
+		 * Überprüft ob der Logout erfolgreich war
 		 */
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://onlinechilishop.de/login/?logout"));
 		Assert.assertTrue(login.getSuccessAlertMessage().contains("Erfolgreich ausgeloggt"));
