@@ -21,7 +21,9 @@ Falls es Probleme mit Java gibt wie zum Beispiel:
 No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
 
 Sollte überprüft werden, ob die Umgebungsvariable richtig gesetzt ist, sodass die JDK verwendet wird. 
-[Umgebungsvariablen Windows 10] (http://www.programmierenlernenhq.de/java-8-installieren-auf-windows-10-pc/) [Umgebungsvariable Windows 7] (http://www.java-forum.org/thema/java-umgebungsvariable-einstellen-unter-windows-7.94072/) [Umgebungsvariable MAC] (https://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/)
+* [Umgebungsvariablen Windows 10](http://www.programmierenlernenhq.de/java-8-installieren-auf-windows-10-pc/)
+* [Umgebungsvariable Windows 7](http://www.java-forum.org/thema/java-umgebungsvariable-einstellen-unter-windows-7.94072/)
+* [Umgebungsvariable MAC](https://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/)
 
 ## Verwendung
 
@@ -29,7 +31,8 @@ Das Grundgerüst kann verwendet werden, um neue Testcases für das eigene Projekt 
 Auch werden einige Vorzüge von Webdriver in diesen schon dargestellt, wie Parametrisierung, Pageobject-Design-Pattern und das Warten auf bestimmte Ereignisse.
 
 ### Starten von Testcases
-Die Testcases können in einer IDE einzelnd als JUnit Testcase gestartet werden oder via Maven mit `mvn test` für alle oder `mvn -Dtest="TestKlassenname" test` für spezifische Testcases. 
+Die Testcases können in einer IDE einzelnd als JUnit Testcase gestartet werden oder via Maven mit `mvn test` für alle oder `mvn -Dtest="TestKlassenname" test` für spezifische Testcases. Um den Beispiel Testcase searchTest zu starten wäre es 
+`mvn -Dtest=searchTest test`
 
 
 ### Konfigurierung
@@ -84,7 +87,6 @@ Diese vordefinierten WebElemente werden durch die Annotation `@FindBy` definiert
 Folgendes Beispiel zeigt eine Vordefinierung des Beispiels für den Login, welches sich auch in diesem Projekt befindet.
 
 ```
-
 @FindBy(name = "e")
 WebElement email;
 
@@ -99,9 +101,7 @@ Solche definierten Elemente können im weiteren Verlauf in Methoden verwendet wer
 
 ```
 public void login(String loginEmail, String loginPassword) {
-
 	logger.info("Authentifizieren mit Email: " + loginEmail + " und Passwort: " + loginPassword);
-
 	email.sendKeys(loginEmail);
 	password.sendKeys(loginPassword);
 	logger.info("Klicke auf Login");
@@ -109,3 +109,19 @@ public void login(String loginEmail, String loginPassword) {
 }
 ```
 
+So wurden die vordefinierten Elemente in einer Methode verwendet, damit der Driver das Login-Formular ausfüllt und abschickt.
+
+Es kann jedoch nicht immer jedes Element vordefiniert werden. Es gibt Elemente, vorallen auf dynamischeren Webseiten, die initial nicht vorhanden sind und erst durch bestimmte Events erscheinen. Auch Animationen oder Änderungen brauchen eine gewisse Zeit, bis diese auf der Webseite sichtbar sind. Solche Elemente werden nicht am Anfang durch @FindBy definiert.
+
+Im Testcase cartTest, welches den Warenkorb testet wird ein Produkt zum Warenkorb hinzugefügt. Nach den Klicken des Buttons zum Hinzufügen vergehen 1-2 Sekunden, bis die Anzahl der Objekte sich im Warenkorb ändern. Um solch ein Verhalten zu implementieren, gibt es den WebDriverWait. Folgendes Beispiel lässt den Browser maximal 10 Sekunden warten, bis sich der Text in einen Element zu einen Bestimmten Wert ändert.
+```
+/**
+* Überprüft, ob die Anzahl der Produkte im Warenkorb sich ändern
+* @param amount die Amzahl der zubeinhaltenen Produkte
+* @return true wenn die Anzahl sich geändert hat, sonst false
+*/
+public Boolean checkCartForHavingItems(String amount) {
+		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartCount, amount));
+	}
+```
+Es gibt verschiedene ExpectedConditions, sodass für jeden Anwendungsfall etwas zu finden ist.
