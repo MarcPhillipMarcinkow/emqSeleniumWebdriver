@@ -3,6 +3,7 @@ package emq.webdriver.example;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,8 @@ import emq.webdriver.example.pageobjects.MainPage;
 @RunWith(Parameterized.class)
 public class searchTest extends AbstractEMQ {
 
-	private String searchkeywoard;
+	private Logger logger = Logger.getLogger(this.getClass().getName());
+	private String searchkeyword;
 	private int resultcount;
 
 	// Pageobject for the main page
@@ -51,7 +53,7 @@ public class searchTest extends AbstractEMQ {
 	 *            die minimale Anzahl zu findener Ergebnisse
 	 */
 	public searchTest(String keyword, int results) {
-		searchkeywoard = keyword;
+		searchkeyword = keyword;
 		resultcount = results;
 	}
 
@@ -70,7 +72,7 @@ public class searchTest extends AbstractEMQ {
 	 */
 	@Test
 	public void Search() {
-		mp.enterKeywordInSearchfield(searchkeywoard);
+		mp.enterKeywordInSearchfield(searchkeyword);
 		mp.waitForSearchResults();
 
 		/*
@@ -79,12 +81,14 @@ public class searchTest extends AbstractEMQ {
 		 */
 		if (resultcount > 0) {
 			Assert.assertTrue(mp.getResultsCount() > 0);
+			logger.info("Suchtest für: " + searchkeyword + " erfolgreich");
 		} else {
 			/*
 			 * Falls die minimale Anzahl der Ergebnisse gleich 0 ist, wurden
 			 * keine Ergebnisse gefunden
 			 */
 			Assert.assertTrue(mp.getResultsCount() == 0);
+			logger.info("Suchtest für: " + searchkeyword + " erfolgreich");
 		}
 	}
 }
