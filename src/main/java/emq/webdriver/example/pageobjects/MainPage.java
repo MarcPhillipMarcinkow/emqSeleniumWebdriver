@@ -9,13 +9,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Diese Klasse ist das Pageobject für die Hauptseite
+ * Diese Klasse ist das Pageobject für die Hauptseite. Dieses beinhaltet
+ * momentan die Buttons, wie Login oder Logout, sowie die Elemente und Methoden
+ * zur Suche
  * 
  * @author Marc Philipp Marcinkowski
  */
 public class MainPage {
 
-	protected WebDriver driver;
+	private WebDriver driver;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@FindBy(id = "searchInput")
@@ -26,19 +28,20 @@ public class MainPage {
 
 	@FindBy(id = "resultCount")
 	WebElement resultCount;
-	
+
 	@FindBy(className = "fa-sign-in")
 	WebElement loginButton;
 
 	@FindBy(className = "fa-sign-out")
 	WebElement logoutButton;
-	
-	@FindBy(className= "fa-user")
+
+	@FindBy(className = "fa-user")
 	WebElement profilButton;
-	
-	@FindBy(id = "cartCount")
-	WebElement cartCount;
-	
+
+	/**
+	 * Initialisiert ein Pageobjekt der Hauptseite. Dieses beinhaltet momentan die Navigation zur Hauptseite, Buttons und die Suche
+	 * @param driver WebDriver
+	 */
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -53,27 +56,29 @@ public class MainPage {
 		driver.get("https://daniel:%23chili@onlinechilishop.de/");
 	}
 
-	
 	/**
 	 * Macht den Webdriver zugänglich
+	 * 
 	 * @return webdriver
 	 */
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
+
 	/**
 	 * Prüft ob der Loginbutton angezeigt wird
 	 */
 	public Boolean loginButtonIsDisplayed() {
 		return loginButton.isDisplayed();
 	}
+
 	/**
 	 * Klickt den Loginbutton auf der Startseite
 	 */
 	public void clickLoginButton() {
 		loginButton.click();
 	}
+
 	/**
 	 * Gibt ein Wort in das Suchfeld ein
 	 * 
@@ -90,8 +95,7 @@ public class MainPage {
 	 */
 	public void waitForSearchResults() {
 		logger.info("Warte auf die Suchergebnisse");
-		(new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(searchResults)).isDisplayed();
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(searchResults)).isDisplayed();
 	}
 
 	/**
@@ -103,17 +107,20 @@ public class MainPage {
 		logger.info("Anzahl gefundener Ergebnisse: " + resultCount.getText());
 		return Integer.parseInt(resultCount.getText());
 	}
-	
+
 	/**
-	 * Überprüft ob Benutzerprofil Button sichtbar ist, dafür wird maximal 10 Sekunden gewartet
+	 * Überprüft ob Benutzerprofil Button sichtbar ist, dafür wird maximal 10
+	 * Sekunden gewartet
+	 * 
 	 * @return true wenn ja, sonst false
 	 */
 	public boolean isLoggedIn() {
-		return (new WebDriverWait(driver, 15)).until(ExpectedConditions.visibilityOf(profilButton)).isDisplayed();	
+		return (new WebDriverWait(driver, 15)).until(ExpectedConditions.visibilityOf(profilButton)).isDisplayed();
 	}
-	
+
 	/**
-	 * Clickt den Logout button. Wegen verzögerungen wird auf den Logout-Button 10 Sekunden gewartet
+	 * Clickt den Logout button. Wegen verzögerungen wird auf den Logout-Button
+	 * 10 Sekunden gewartet
 	 */
 	public void clickLogoutButton() {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(logoutButton)).click();

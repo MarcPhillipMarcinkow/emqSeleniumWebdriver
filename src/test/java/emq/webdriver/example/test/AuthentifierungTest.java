@@ -1,13 +1,13 @@
-package emq.webdriver.example;
+package emq.webdriver.example.test;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-import emq.webdriver.example.pageobjects.CustomerProfil;
-import emq.webdriver.example.pageobjects.Login;
+import emq.webdriver.example.pageobjects.CustomerProfilPage;
+import emq.webdriver.example.pageobjects.LoginPage;
 import emq.webdriver.example.pageobjects.MainPage;
-import emq.webdriver.example.pageobjects.Registration;
+import emq.webdriver.example.pageobjects.RegistrationPage;
 
 /**
  * Diese Klasse beinhaltet die Testfälle für die Authentifizierung, da die Registrierung nur einmalig erfolgt,
@@ -32,7 +32,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 	public void registration() {
 		mp.openPage();
 
-		Registration reg = new Registration(driver);
+		RegistrationPage reg = new RegistrationPage(driver);
 		reg.openPage();
 		reg.fillRegistrationForm();
 	}
@@ -47,7 +47,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 		mp.openPage();
 		mp.clickLoginButton();
 
-		Login login = new Login(driver);
+		LoginPage login = new LoginPage(driver);
 		
 		//prüft ob der Redirekt zur Loginmaske funktionierte
 		Assert.assertTrue(driver.getCurrentUrl().contains("login"));
@@ -76,7 +76,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 		Assert.assertTrue(mp.isLoggedIn());
 		
 		logger.info("Prüft ob die richtigen Kundendaten angezeigt werden");
-		CustomerProfil cp = new CustomerProfil(driver);
+		CustomerProfilPage cp = new CustomerProfilPage(driver);
 		Assert.assertEquals(cp.getEmailAdresse(), emailAdresse);
 		
 		

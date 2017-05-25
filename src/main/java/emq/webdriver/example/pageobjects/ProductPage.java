@@ -15,8 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Marc Philipp Marcinkowski
  *
  */
-public class ProductPage extends MainPage {
+public class ProductPage  {
 
+	private WebDriver driver;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
@@ -40,9 +41,16 @@ public class ProductPage extends MainPage {
 
 	@FindBy(className = "delete")
 	WebElement deleteButton;
+	
+	@FindBy(id = "cartCount")
+	WebElement cartCount;
 
+	/**
+	 * Initialisiert ein Pageobjekt einer Produktseite. Dieses beinhaltet momentan das Befüllen des Warenkorbs, so wie dessen Funktionalität
+	 * @param driver WebDriver
+	 */
 	public ProductPage(WebDriver driver) {
-		super(driver);
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

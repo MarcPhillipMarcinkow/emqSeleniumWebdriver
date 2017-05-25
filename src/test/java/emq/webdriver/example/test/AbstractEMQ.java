@@ -1,4 +1,4 @@
-package emq.webdriver.example;
+package emq.webdriver.example.test;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -8,7 +8,8 @@ import emq.webdriver.example.config.ConfigDrivers;
 
 /**
  * Diese abstrakte Klasse ist eine Hilfsklasse für die einzelnen Testfälle. Es
- * wird dort anfangs initiall der Webdriver definiert und instanziert. Auch wird der WebDriver am ende wieder geschlossen
+ * wird dort anfangs initiall der Webdriver definiert und instanziert. Auch wird
+ * der WebDriver am Ende wieder geschlossen
  * 
  * @author Marc Philipp Marcinkowski
  *
@@ -28,8 +29,9 @@ public abstract class AbstractEMQ {
 	}
 
 	/**
-	 * Gibt den Webdriver zurück
-	 * @return den Webdriver
+	 * Gibt den Konfigurierten Webdriver zurück
+	 * 
+	 * @return Webdriver
 	 */
 	public WebDriver getDriver() {
 		return driver;

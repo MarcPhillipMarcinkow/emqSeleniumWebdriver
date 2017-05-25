@@ -1,4 +1,4 @@
-package emq.webdriver.example;
+package emq.webdriver.example.test;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;

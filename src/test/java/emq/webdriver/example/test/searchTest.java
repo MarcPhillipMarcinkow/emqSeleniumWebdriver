@@ -1,4 +1,4 @@
-package emq.webdriver.example;
+package emq.webdriver.example.test;
 
 import java.util.Arrays;
 import java.util.Collection;
