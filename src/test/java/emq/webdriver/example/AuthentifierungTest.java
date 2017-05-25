@@ -4,12 +4,16 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
+import emq.webdriver.example.pageobjects.CustomerProfil;
 import emq.webdriver.example.pageobjects.Login;
 import emq.webdriver.example.pageobjects.MainPage;
 import emq.webdriver.example.pageobjects.Registration;
 
 /**
- * Diese Klasse beinhaltet die Testfälle für die Authentifizierung
+ * Diese Klasse beinhaltet die Testfälle für die Authentifizierung, da die Registrierung nur einmalig erfolgt,
+ * wurde dieser Testcase nicht weiter bearbeitet und ist deaktiviert. Für das Login wird erfolgreiches und unerfolgreiches Einloggen getestet.
+ * Desweiteren wird überprüft, ob im Profil einige Daten stimmen und ob das Verhalten im eingelogten zustand richtig ist.
+ * Am Ende wird sich ausgeloggt.
  * 
  * @author Marc
  *
@@ -24,7 +28,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 	/*
 	 * Temporär deaktiviert, da schon viele Test-Accounts erstellt wurden
 	 */
-	// @Test
+	//@Test
 	public void registration() {
 		mp.openPage();
 
@@ -35,10 +39,18 @@ public class AuthentifierungTest extends AbstractEMQ {
 
 	@Test
 	public void login() {
+		
+		String emailAdresse = "MaxMustermann@discardmail.com";
+		String password = "Max";
+		
+		//öffnet die Startseite
 		mp.openPage();
+		mp.clickLoginButton();
 
 		Login login = new Login(driver);
-		login.openPage();
+		
+		//prüft ob der Redirekt zur Loginmaske funktionierte
+		Assert.assertTrue(driver.getCurrentUrl().contains("login"));
 
 		/**
 		 * Login mit falschen Daten
@@ -46,6 +58,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 
 		logger.info("Login mit ungültigen Daten");
 		login.login("asdf", "aas2fds");
+		logger.info("Überprüfe ob in der Loginmaske der Error ein Error erscheint");
 		Assert.assertTrue(login.getDangerAlertMessage().contains("Ungültige Zugangsdaten."));
 
 		/**
@@ -53,15 +66,20 @@ public class AuthentifierungTest extends AbstractEMQ {
 		 */
 
 		logger.info("Login mit ungültigen Daten");
-		login.login("MaxMustermann@discardmail.com", "Max");
+		login.login(emailAdresse, password);
 
-		/*
-		 * Überprüft ob der Login erfolgreich war in dem der redirekt
-		 * funktionierte
-		 */
+		
 		logger.info("Überprüfe ob der redirect und somit der Login erfolgreich war");
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://onlinechilishop.de/customer/"));
-
+		
+		logger.info("Überprüft ob der Benutzerprofil-Button nun sichtbar ist");
+		Assert.assertTrue(mp.isLoggedIn());
+		
+		logger.info("Prüft ob die richtigen Kundendaten angezeigt werden");
+		CustomerProfil cp = new CustomerProfil(driver);
+		Assert.assertEquals(cp.getEmailAdresse(), emailAdresse);
+		
+		
 		login.logout();
 
 		/*
@@ -71,5 +89,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://onlinechilishop.de/login/?logout"));
 		logger.info("Überprüfe ob die success Nachricht richtig ist");
 		Assert.assertTrue(login.getSuccessAlertMessage().contains("Erfolgreich ausgeloggt"));
+		logger.info("überprüfe ob der Benutzerprofil-Button nicht angezeigt wird");
+		Assert.assertFalse(mp.isLoggedIn());
 	}
 }

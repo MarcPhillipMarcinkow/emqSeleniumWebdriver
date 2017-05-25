@@ -1,6 +1,7 @@
 package emq.webdriver.example.pageobjects;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +27,9 @@ public class MainPage {
 
 	@FindBy(id = "resultCount")
 	WebElement resultCount;
+	
+	@FindBy(className = "fa-sign-in")
+	WebElement loginButton;
 
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
@@ -41,6 +45,12 @@ public class MainPage {
 		driver.get("https://daniel:%23chili@onlinechilishop.de/");
 	}
 
+	/**
+	 * Klickt den Loginbutton auf der Startseite
+	 */
+	public void clickLoginButton() {
+		loginButton.click();
+	}
 	/**
 	 * Gibt ein Wort in das Suchfeld ein
 	 * 
@@ -70,5 +80,13 @@ public class MainPage {
 	public int getResultsCount() {
 		logger.info("Anzahl gefundener Ergebnisse: " + resultCount.getText());
 		return Integer.parseInt(resultCount.getText());
+	}
+	
+	/**
+	 * Überprüft ob Benutzerprofil Button sichtbar ist
+	 * @return true wenn ja, sonst false
+	 */
+	public boolean isLoggedIn() {
+		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.className("fa-user"))).isDisplayed();	
 	}
 }

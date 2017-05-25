@@ -38,13 +38,7 @@ public class Login {
 		PageFactory.initElements(driver, this);
 	}
 
-	/**
-	 * Öffnet die Login Seite
-	 */
-	public void openPage() {
-		logger.info("Navigiere zur Login-Makse");
-		driver.navigate().to("https://onlinechilishop.de/login/");
-	}
+
 
 	/**
 	 * Füllt das Loginformular
