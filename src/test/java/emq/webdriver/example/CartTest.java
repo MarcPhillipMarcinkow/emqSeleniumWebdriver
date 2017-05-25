@@ -54,12 +54,7 @@ private Logger logger = Logger.getLogger(this.getClass().getName());
 		pp.clickDeleteButton();
 		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 0 ist");
 		Assert.assertTrue(pp.checkCartForHavingItems("0"));
-	
-	
-		
-		
-		
-		
+			
 	}
 
 }

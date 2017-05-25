@@ -9,9 +9,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ProductPage {
+/**
+ * Pageobjekt für die Produktseite. Diese Extended als Beispiel die MainPage, welches die Elemente wie Warenkorb schon definiert hat,
+ * da dieses dann auch in weiteren Methoden von anderen Pageobjects verwendet werden können
+ * @author Marc Philipp Marcinkowski
+ *
+ */
+public class ProductPage extends MainPage {
 
-	private WebDriver driver;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
@@ -23,9 +28,6 @@ public class ProductPage {
 
 	@FindBy(id = "salePrice")
 	WebElement salePrice;
-
-	@FindBy(id = "cartCount")
-	WebElement cartCount;
 
 	@FindBy(id = "cartSum")
 	WebElement cartSum;
@@ -40,7 +42,7 @@ public class ProductPage {
 	WebElement deleteButton;
 
 	public ProductPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -65,15 +67,6 @@ public class ProductPage {
 	}
 
 	/**
-	 * Bekomme die Anzahl der Produkte, die im Warenkorb sind
-	 * 
-	 * @return Die Anzahl der Produkte im Warenkorb
-	 */
-	public int getCartCount() {
-		return Integer.parseInt(cartCount.getText());
-	}
-
-	/**
 	 * Prüft ob der Warenkorb eine bestimmte Summe hat
 	 * @param expectedSum Erwartete Summe des Warenkorbs
 	 * @return true, falls ja, sonst false
@@ -82,14 +75,6 @@ public class ProductPage {
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartSum, expectedSum));
 	}
 
-	/**
-	 * Bekomme den Preis des Produktes
-	 * 
-	 * @return Der Preis des Produkts
-	 */
-	public String getSellPrice() {
-		return salePrice.getText();
-	}
 
 	/**
 	 * Überprüft, ob die Anzahl der Produkte im Warenkorb sich ändern
@@ -102,6 +87,26 @@ public class ProductPage {
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartCount, amount));
 	}
 
+	
+	/**
+	 * Bekomme den Preis des Produktes
+	 * 
+	 * @return Der Preis des Produkts
+	 */
+	public String getSellPrice() {
+		return salePrice.getText();
+	}
+
+
+	/**
+	 * Bekomme die Anzahl der Produkte, die im Warenkorb sind
+	 * 
+	 * @return Die Anzahl der Produkte im Warenkorb
+	 */
+	public int getCartCount() {
+		return Integer.parseInt(cartCount.getText());
+	}
+	
 	/**
 	 * Setzt die Anzahl der zu Kaufenden Menge
 	 * 

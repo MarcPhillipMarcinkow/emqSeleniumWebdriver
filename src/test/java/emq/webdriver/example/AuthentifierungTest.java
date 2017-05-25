@@ -89,7 +89,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://onlinechilishop.de/login/?logout"));
 		logger.info("Überprüfe ob die success Nachricht richtig ist");
 		Assert.assertTrue(login.getSuccessAlertMessage().contains("Erfolgreich ausgeloggt"));
-		logger.info("überprüfe ob der Benutzerprofil-Button nicht angezeigt wird");
-		Assert.assertFalse(mp.isLoggedIn());
+		logger.info("überprüfe ob der Loginbutton wieder angezeigt wird");
+		Assert.assertTrue(mp.loginButtonIsDisplayed());
 	}
 }

@@ -1,7 +1,6 @@
 package emq.webdriver.example.pageobjects;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class MainPage {
 
-	private WebDriver driver;
+	protected WebDriver driver;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@FindBy(id = "searchInput")
@@ -37,6 +36,9 @@ public class MainPage {
 	@FindBy(className= "fa-user")
 	WebElement profilButton;
 	
+	@FindBy(id = "cartCount")
+	WebElement cartCount;
+	
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -51,6 +53,21 @@ public class MainPage {
 		driver.get("https://daniel:%23chili@onlinechilishop.de/");
 	}
 
+	
+	/**
+	 * Macht den Webdriver zugänglich
+	 * @return webdriver
+	 */
+	public WebDriver getDriver() {
+		return driver;
+	}
+	
+	/**
+	 * Prüft ob der Loginbutton angezeigt wird
+	 */
+	public Boolean loginButtonIsDisplayed() {
+		return loginButton.isDisplayed();
+	}
 	/**
 	 * Klickt den Loginbutton auf der Startseite
 	 */
