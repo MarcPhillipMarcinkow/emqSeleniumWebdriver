@@ -32,6 +32,12 @@ public class Login {
 
 	@FindBy(tagName = "button")
 	WebElement submit;
+	
+	@FindBy(className = "alert-success")
+	WebElement sucessMessage;
+	
+	@FindBy(className = "alert-danger")
+	WebElement errorMessage;
 
 	public Login(WebDriver driver) {
 		this.driver = driver;
@@ -51,19 +57,10 @@ public class Login {
 	public void login(String loginEmail, String loginPassword) {
 
 		logger.info("Authentifizieren mit Email: " + loginEmail + " und Passwort: " + loginPassword);
-
 		email.sendKeys(loginEmail);
 		password.sendKeys(loginPassword);
 		logger.info("Klicke auf Login");
 		submit.submit();
-	}
-
-	/**
-	 * Navigiert zum Logout
-	 */
-	public void logout() {
-		logger.info("Navigiere zum Logout");
-		driver.navigate().to("https://onlinechilishop.de/login/?logout");
 	}
 
 	/**
@@ -73,10 +70,8 @@ public class Login {
 	 * @return Gibt die erfolgreiche Nachricht des Logins zurück
 	 */
 	public String getSuccessAlertMessage() {
-		WebElement sucess = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.presenceOfElementLocated(By.className("alert-success")));
-		logger.info("Erfolgreiche Nachricht: " + sucess.getText());
-		return sucess.getText();
+		return (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.visibilityOf(sucessMessage)).getText();
 	}
 
 	/**
@@ -86,9 +81,7 @@ public class Login {
 	 * @return Gibt die nicht erfolgreiche Nachricht (Error) des Logins zurück
 	 */
 	public String getDangerAlertMessage() {
-		WebElement error = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.presenceOfElementLocated(By.className("alert-danger")));
-		logger.info("Error Nachricht: " + error.getText());
-		return error.getText();
+		return (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.visibilityOf(errorMessage)).getText();
 	}
 }

@@ -31,6 +31,12 @@ public class MainPage {
 	@FindBy(className = "fa-sign-in")
 	WebElement loginButton;
 
+	@FindBy(className = "fa-sign-out")
+	WebElement logoutButton;
+	
+	@FindBy(className= "fa-user")
+	WebElement profilButton;
+	
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -67,9 +73,8 @@ public class MainPage {
 	 */
 	public void waitForSearchResults() {
 		logger.info("Warte auf die Suchergebnisse");
-		WebElement searchResults2 = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(searchResults));
-		searchResults2.isDisplayed();
+		(new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.visibilityOf(searchResults)).isDisplayed();
 	}
 
 	/**
@@ -83,17 +88,17 @@ public class MainPage {
 	}
 	
 	/**
-	 * Überprüft ob Benutzerprofil Button sichtbar ist
+	 * Überprüft ob Benutzerprofil Button sichtbar ist, dafür wird maximal 10 Sekunden gewartet
 	 * @return true wenn ja, sonst false
 	 */
 	public boolean isLoggedIn() {
-		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.className("fa-user"))).isDisplayed();	
+		return (new WebDriverWait(driver, 15)).until(ExpectedConditions.visibilityOf(profilButton)).isDisplayed();	
 	}
 	
 	/**
-	 * Clickt den Logout Button wenn dieser angezeigt wird
+	 * Clickt den Logout button. Wegen verzögerungen wird auf den Logout-Button 10 Sekunden gewartet
 	 */
 	public void clickLogoutButton() {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.className("fa-sign-out"))).click();
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
 	}
 }

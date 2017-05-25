@@ -74,12 +74,12 @@ public class ProductPage {
 	}
 
 	/**
-	 * Bekomme die Summe der Bestellung
-	 * 
-	 * @return Die Summe der Bestellung
+	 * Prüft ob der Warenkorb eine bestimmte Summe hat
+	 * @param expectedSum Erwartete Summe des Warenkorbs
+	 * @return true, falls ja, sonst false
 	 */
-	public String getCartSum() {
-		return cartSum.getText();
+	public Boolean expectCartSumToBe(String expectedSum) {
+		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartSum, expectedSum));
 	}
 
 	/**

@@ -43,7 +43,7 @@ private Logger logger = Logger.getLogger(this.getClass().getName());
 		logger.info("Produkt wurde hinzugefügt");
 		
 		logger.info("Vergleiche die Summe des Warenkorbs mit dem Artikelpreis");
-		Assert.assertEquals(pp.getCartSum(), pp.getSellPrice());
+		Assert.assertTrue(pp.expectCartSumToBe(pp.getSellPrice()));
 		
 		logger.info("Ändere die Menge auf " +menge);
 		pp.setAmount(menge);
