@@ -18,7 +18,7 @@ public class CartTest extends AbstractEMQ {
 private Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	@Test
-	public void addToCart() {
+	public void addToCartTest() {
 		
 		String menge = "2 Stück";
 		String productId = "96";

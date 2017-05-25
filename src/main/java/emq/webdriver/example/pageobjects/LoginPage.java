@@ -24,13 +24,13 @@ public class LoginPage {
 	 */
 
 	@FindBy(name = "e")
-	WebElement email;
+	WebElement emailField;
 
 	@FindBy(name = "input")
-	WebElement password;
+	WebElement passwordField;
 
 	@FindBy(tagName = "button")
-	WebElement submit;
+	WebElement submitButton;
 	
 	@FindBy(className = "alert-success")
 	WebElement sucessMessage;
@@ -58,10 +58,11 @@ public class LoginPage {
 	public void login(String loginEmail, String loginPassword) {
 
 		logger.info("Authentifizieren mit Email: " + loginEmail + " und Passwort: " + loginPassword);
-		email.sendKeys(loginEmail);
-		password.sendKeys(loginPassword);
-		logger.info("Klicke auf Login");
-		submit.submit();
+		public void login(String loginEmail, String loginPassword) {
+			emailField.sendKeys(loginEmail);
+			passwordField.sendKeys(loginPassword);
+			submitButton.submit();
+		}
 	}
 
 	/**

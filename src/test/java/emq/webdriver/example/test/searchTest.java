@@ -71,7 +71,7 @@ public class searchTest extends AbstractEMQ {
 	 * diesen Beispiel 3x Ausgeführt wird.
 	 */
 	@Test
-	public void Search() {
+	public void SearchTest() {
 		mp.enterKeywordInSearchfield(searchkeyword);
 		mp.waitForSearchResults();
 

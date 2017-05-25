@@ -29,7 +29,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 	 * Temporär deaktiviert, da schon viele Test-Accounts erstellt wurden
 	 */
 	//@Test
-	public void registration() {
+	public void registrationTest() {
 		mp.openPage();
 
 		RegistrationPage reg = new RegistrationPage(driver);
@@ -38,7 +38,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 	}
 
 	@Test
-	public void login() {
+	public void loginTest() {
 		
 		String emailAdresse = "MaxMustermann@discardmail.com";
 		String password = "Max";
