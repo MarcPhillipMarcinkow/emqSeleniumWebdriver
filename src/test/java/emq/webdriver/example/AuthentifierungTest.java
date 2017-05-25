@@ -80,7 +80,7 @@ public class AuthentifierungTest extends AbstractEMQ {
 		Assert.assertEquals(cp.getEmailAdresse(), emailAdresse);
 		
 		
-		login.logout();
+		mp.clickLogoutButton();
 
 		/*
 		 * Überprüft ob der Logout erfolgreich war

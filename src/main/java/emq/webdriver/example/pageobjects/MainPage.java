@@ -89,4 +89,11 @@ public class MainPage {
 	public boolean isLoggedIn() {
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.className("fa-user"))).isDisplayed();	
 	}
+	
+	/**
+	 * Clickt den Logout Button wenn dieser angezeigt wird
+	 */
+	public void clickLogoutButton() {
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.className("fa-sign-out"))).click();
+	}
 }
