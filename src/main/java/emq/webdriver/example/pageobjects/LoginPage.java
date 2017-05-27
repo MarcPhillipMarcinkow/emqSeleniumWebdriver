@@ -31,16 +31,18 @@ public class LoginPage {
 
 	@FindBy(tagName = "button")
 	WebElement submitButton;
-	
+
 	@FindBy(className = "alert-success")
 	WebElement sucessMessage;
-	
+
 	@FindBy(className = "alert-danger")
 	WebElement errorMessage;
 
 	/**
 	 * Initialisiert ein Pageobjekt für das Einloggen und Ausloggen.
-	 * @param driver WebDriver
+	 * 
+	 * @param driver
+	 *            WebDriver
 	 */
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -58,12 +60,11 @@ public class LoginPage {
 	public void login(String loginEmail, String loginPassword) {
 
 		logger.info("Authentifizieren mit Email: " + loginEmail + " und Passwort: " + loginPassword);
-		public void login(String loginEmail, String loginPassword) {
-			emailField.sendKeys(loginEmail);
-			passwordField.sendKeys(loginPassword);
-			submitButton.submit();
-		}
+		emailField.sendKeys(loginEmail);
+		passwordField.sendKeys(loginPassword);
+		submitButton.submit();
 	}
+
 
 	/**
 	 * Bekomme die erfolgreiche Nachricht im Loginformular, welche mit grüner
@@ -72,8 +73,7 @@ public class LoginPage {
 	 * @return Gibt die erfolgreiche Nachricht des Logins zurück
 	 */
 	public String getSuccessAlertMessage() {
-		return (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(sucessMessage)).getText();
+		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(sucessMessage)).getText();
 	}
 
 	/**
@@ -83,7 +83,6 @@ public class LoginPage {
 	 * @return Gibt die nicht erfolgreiche Nachricht (Error) des Logins zurück
 	 */
 	public String getDangerAlertMessage() {
-		return (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.visibilityOf(errorMessage)).getText();
+		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(errorMessage)).getText();
 	}
 }
