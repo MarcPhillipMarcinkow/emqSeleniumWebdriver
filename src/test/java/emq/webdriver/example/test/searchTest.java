@@ -15,7 +15,9 @@ import emq.webdriver.example.pageobjects.MainPage;
 
 /**
  * Diese Klasse ist ein Testcase für die Suche. Diese wird Parametrisiert, um
- * die Vorteile von Webdriver zu verdeutlichen
+ * die Vorteile von Webdriver zu verdeutlichen. Bei einer PArametrisierung wird
+ * der Testcase mit verschiedenen Inputdaten wiederholt, die vorher definiert
+ * werden
  * 
  * @author Marc Philipp Marcinkowski
  *
@@ -35,7 +37,7 @@ public class searchTest extends AbstractEMQ {
 	 * beinhalten den Suchbegriff, sowie die minimale Anzahl zu findener
 	 * Ergebnisse
 	 * 
-	 * @return collection with the data
+	 * @return collection mit den verschiedenen Input-Daten
 	 */
 	@Parameters
 	public static Collection<Object[]> data() {
@@ -67,8 +69,9 @@ public class searchTest extends AbstractEMQ {
 	}
 
 	/**
-	 * Der Haupttestfall, welcher die definierten Parameter verwendet und in
+	 * Der Haupttestfall, welcher die definierten Parameter searchkeyword und resultcount verwendet und in
 	 * diesen Beispiel 3x Ausgeführt wird.
+	 * 
 	 */
 	@Test
 	public void SearchTest() {

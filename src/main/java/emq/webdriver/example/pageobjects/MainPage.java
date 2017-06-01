@@ -48,28 +48,20 @@ public class MainPage {
 	}
 
 	/**
-	 * öffnet die Hauptseite
+	 * öffnet die Hauptseite und Authentifiziert sich per HTTP
 	 */
 	public void openPage() {
 
 		logger.info("Öffnet die Hauptseite");
-		driver.get("https://daniel:%23chili@onlinechilishop.de/");
-	}
-
-	/**
-	 * Macht den Webdriver zugänglich
-	 * 
-	 * @return webdriver
-	 */
-	public WebDriver getDriver() {
-		return driver;
+		driver.get("https://daniel:%23chili@onlinechilishop.de/"); // Öffnet die Seite mit Authentifizierung
 	}
 
 	/**
 	 * Prüft ob der Loginbutton angezeigt wird
+	 * @return true, wenn der Button angezeigt wird, sonst false
 	 */
 	public Boolean loginButtonIsDisplayed() {
-		return loginButton.isDisplayed();
+		return loginButton.isDisplayed(); 
 	}
 
 	/**
@@ -123,6 +115,9 @@ public class MainPage {
 	 * 10 Sekunden gewartet
 	 */
 	public void clickLogoutButton() {
+		/*
+		 * Wartet maximal 10 Sekunden bis der logoutButton klickbar ist. Wenn er klickbar ist wird er geklickt.
+		 */
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
 	}
 }

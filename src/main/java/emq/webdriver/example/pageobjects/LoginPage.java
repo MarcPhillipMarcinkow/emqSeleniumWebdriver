@@ -45,8 +45,8 @@ public class LoginPage {
 	 *            WebDriver
 	 */
 	public LoginPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
+		this.driver = driver; //übergibt den driver
+		PageFactory.initElements(driver, this); // initialisiert die Elemente des Pageobjekts
 	}
 
 	/**
@@ -60,9 +60,9 @@ public class LoginPage {
 	public void login(String loginEmail, String loginPassword) {
 
 		logger.info("Authentifizieren mit Email: " + loginEmail + " und Passwort: " + loginPassword);
-		emailField.sendKeys(loginEmail);
-		passwordField.sendKeys(loginPassword);
-		submitButton.submit();
+		emailField.sendKeys(loginEmail); // Gibt die Emaildaten in das Feld ein
+		passwordField.sendKeys(loginPassword); // Gibt das Passwort in das Feld ein
+		submitButton.submit(); // Submittet das Formular über den Button
 	}
 
 
@@ -73,6 +73,10 @@ public class LoginPage {
 	 * @return Gibt die erfolgreiche Nachricht des Logins zurück
 	 */
 	public String getSuccessAlertMessage() {
+		/*
+		 * Es wird maximal 10 Sekunden gewartet, bis die SucessMessage angezeigt wird. Ohne ein Wait kann es sein, dass die Nachricht noch nicht angezeigt wird
+		 * aber der Driver es erwartet und das Element nicht gefunden wird, oder die Nachricht noch leer ist
+		 */
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(sucessMessage)).getText();
 	}
 

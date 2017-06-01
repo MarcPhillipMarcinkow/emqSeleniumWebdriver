@@ -1,43 +1,45 @@
 ## Beschreibung
 
-Dieses Projekt ist ein Beispiel Projekt für die Verwendung von Selenium Webdriver, welches im Rahmen 
-von "EMQ und QUS - Entwicklungsmethoden und Qualitätssicherung" im Themenbereich "Web-Test" verwendet werden kann.
+Dieses Projekt ist ein Beispiel Projekt fï¿½r die Verwendung von Selenium Webdriver, welches im Rahmen 
+von "EMQ und QUS - Entwicklungsmethoden und Qualitï¿½tssicherung" im Themenbereich "Web-Test" verwendet werden kann.
 Das Projekt ist in Java implementiert und im Folgenden wird die Installation sowie Verwendung beschrieben.
 
-## Benötigte Software
-Um das Projekt installieren und starten zu können wird folgendes benötigt.
+## Benï¿½tigte Software
+Um das Projekt installieren und starten zu kï¿½nnen wird folgendes benï¿½tigt.
 1. [Apache Maven](https://maven.apache.org/) 
 2. Java JDK 1.8 
 
 ## Installation
 
-Das Beispielprojekt kann entweder über CMD oder in einer Entwicklungsumgebung installiert werden.
-Über CMD muss zum Projektordner navigiert werden, wo auch die Pom.xml liegt und folgendes Kommando ausgeführt werden.
+Das Beispielprojekt kann entweder ï¿½ber CMD oder in einer Entwicklungsumgebung installiert werden.
+ï¿½ber CMD muss zum Projektordner navigiert werden, wo auch die Pom.xml liegt und folgendes Kommando ausgefï¿½hrt werden.
 `mvn install`
-In einer Entwicklungsumgebung kann das Projekt als ein Mavenprojekt eingebunden werden und dort als `mvn install` installiert werden. Dabei werden die benötigten Dependencies heruntergeladen, wie die verschiedenen Webdriver und andere Bibliotheken.
-Die Beispiel Test-Cases werden dabei auch ausgeführt, was bei nicht vorhanden sein von Google-Chrome zu Fehlern führen kann. Dies beeinträchtigt jedoch nicht die Installation und kann im Fehlerfall ignoriert werden.
+In einer Entwicklungsumgebung kann das Projekt als ein Mavenprojekt eingebunden werden und dort als `mvn install` installiert werden. Dabei werden die benï¿½tigten Dependencies heruntergeladen, wie die verschiedenen Webdriver und andere Bibliotheken.
+Die Beispiel Test-Cases werden dabei auch ausgefï¿½hrt, was bei nicht vorhanden sein von Google-Chrome zu Fehlern fï¿½hren kann. Dies beeintrï¿½chtigt jedoch nicht die Installation und kann im Fehlerfall ignoriert werden. Die Beispiele funktionieren jedoch nur mit Google Chrome, da unser Projektgegenstand eine HTTP-Authentifizierung besitzt, welche zum Beispiel von Firefox nicht gehandhabt werden kann.
 
 Falls es Probleme mit Java gibt wie zum Beispiel: 
 No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
 
-Sollte überprüft werden, ob die Umgebungsvariable richtig gesetzt ist, sodass die JDK verwendet wird. 
+Sollte ï¿½berprï¿½ft werden, ob die Umgebungsvariable richtig gesetzt ist, sodass die JDK verwendet wird. 
 * [Umgebungsvariablen Windows 10](http://www.programmierenlernenhq.de/java-8-installieren-auf-windows-10-pc/)
 * [Umgebungsvariable Windows 7](http://www.java-forum.org/thema/java-umgebungsvariable-einstellen-unter-windows-7.94072/)
 * [Umgebungsvariable MAC](https://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/)
 
+Alternativ kann auch der Path zur JDK im Mavenbefehl definiert werden, mit: `-Dmaven.compiler.executable=/path/to/the/javac compile`
+
 ## Verwendung
 
-Das Grundgerüst kann verwendet werden, um neue Testcases für das eigene Projekt zu erstellen. Die Beispiele die schon implementiert sind können dabei als Anhaltspunkt dienen, wie diese in diesem Grundgerüst aufgebaut sein sollten.
-Auch werden einige Vorzüge von Webdriver in diesen schon dargestellt, wie Parametrisierung, Pageobject-Design-Pattern und das Warten auf bestimmte Ereignisse.
+Das Grundgerï¿½st kann verwendet werden, um neue Testcases fï¿½r das eigene Projekt zu erstellen. Die Beispiele die schon implementiert sind kï¿½nnen dabei als Anhaltspunkt dienen, wie diese in diesem Grundgerï¿½st aufgebaut sein sollten.
+Auch werden einige Vorzï¿½ge von Webdriver in diesen schon dargestellt, wie Parametrisierung, Pageobject-Design-Pattern und das Warten auf bestimmte Ereignisse.
 
 ### Starten von Testcases
-Die Testcases können in einer IDE einzelnd als JUnit Testcase gestartet werden oder via Maven mit `mvn test` für alle oder `mvn -Dtest="TestKlassenname" test` für spezifische Testcases. Um den Beispiel Testcase searchTest zu starten wäre es 
+Die Testcases kï¿½nnen in einer IDE einzelnd als JUnit Testcase gestartet werden oder via Maven mit `mvn test` fï¿½r alle oder `mvn -Dtest="TestKlassenname" test` fï¿½r spezifische Testcases. Um den Beispiel Testcase searchTest zu starten wï¿½re es 
 `mvn -Dtest=searchTest test`
 
 
 ### Konfigurierung
 
-In der Klasse src\test\java\emq\webdriver\example\AbstractEMQ kann der zu benutzende Webdriver, also Chrome, Firefox und weitere ausgewählt werden.
+In der Klasse src\test\java\emq\webdriver\example\AbstractEMQ kann der zu benutzende Webdriver, also Chrome, Firefox und weitere ausgewï¿½hlt werden.
 
 ```
 /**
@@ -50,30 +52,30 @@ public static void setDriver() {
 	driver.manage().window().maximize();
 }
 ```
-In diesem Codebeispiel wird der Webdriver für Google Chrome verwendet, was durch `driver = conf.getChrome();`
+In diesem Codebeispiel wird der Webdriver fï¿½r Google Chrome verwendet, was durch `driver = conf.getChrome();`
 definiert wird. Dieser ist auch im Projekt momentan definiert.
 
-Die folgenden Webdriver können momentan durch die ConfigDrivers Klasse verwendet werden:
-* getFirefox();  --> Für Firefox
-* getChrome();   --> Für Google Chrome
-* getIE(); --> Für InternetExplorer
-* getOpera(); --> Für Opera
-* getEdge(); --> Für Edge
-* getPhantomJS(); --> Für den Headless Browser Phantomjs
+Die folgenden Webdriver kï¿½nnen momentan durch die ConfigDrivers Klasse verwendet werden:
+* getFirefox();  --> Fï¿½r Firefox
+* getChrome();   --> Fï¿½r Google Chrome
+* getIE(); --> Fï¿½r InternetExplorer
+* getOpera(); --> Fï¿½r Opera
+* getEdge(); --> Fï¿½r Edge
+* getPhantomJS(); --> Fï¿½r den Headless Browser Phantomjs
 
-Der Browser muss dazu auf dem System installiert sein, also wenn man z.B. mit Firefox testen will, dann benötigt man einen installierten Firefox.
+Der Browser muss dazu auf dem System installiert sein, also wenn man z.B. mit Firefox testen will, dann benï¿½tigt man einen installierten Firefox.
 
 
 
 ## Erstellung eines Testcases
 
-Jeder Testcase, der unter src/test/java erstellt wird, muss die abstrakte Klasse AbstractEMQ extenden, da diese den zuverwendenen Webdriver instanziert und dieser für diese Klasse verwendet wird.
-Testcases verwenden Pageobjects mit denen die Funktionalität der Seite geprüft wird. Deshalb sollte die Erstellung eines Testcases und Pageobjects parallel erfolgen. Möchte ich bei der Authentifierung den Login testen,
-dann muss ich die Felder ausfüllen. Im Pageobject werden dann die Felder vordefiniert und Methoden geschrieben. Diese werden dann im Testcase verwendet.
+Jeder Testcase, der unter src/test/java erstellt wird, muss die abstrakte Klasse AbstractEMQ extenden, da diese den zuverwendenen Webdriver instanziert und dieser fï¿½r diese Klasse verwendet wird.
+Testcases verwenden Pageobjects mit denen die Funktionalitï¿½t der Seite geprï¿½ft wird. Deshalb sollte die Erstellung eines Testcases und Pageobjects parallel erfolgen. Mï¿½chte ich bei der Authentifierung den Login testen,
+dann muss ich die Felder ausfï¿½llen. Im Pageobject werden dann die Felder vordefiniert und Methoden geschrieben. Diese werden dann im Testcase verwendet.
 
 ### Erstellung eines Pageobjects
 
-Für ein Pageobjekt wird eine neue Klasse erzeugt. Wichtig dabei ist, das ein Konstruktor benötigt wird, ohne den die vordefinierten Webelemente nicht lokalisiert werden können. Für das Pageobjekt Login wird daher folgender Konstruktor benötigt
+Fï¿½r ein Pageobjekt wird eine neue Klasse erzeugt. Wichtig dabei ist, das ein Konstruktor benï¿½tigt wird, ohne den die vordefinierten Webelemente nicht lokalisiert werden kï¿½nnen. Fï¿½r das Pageobjekt Login wird daher folgender Konstruktor benï¿½tigt
 
 ```
 public Login(WebDriver driver) {
@@ -82,9 +84,9 @@ public Login(WebDriver driver) {
 }
 ```
 
-Es wird der Driver benötigt, welches den Browser manipuliert und schon definiert und instanziert wurde, sowie müssen die vordefinierten Webelemente initialisiert werden, was durch `PageFactory.initElements(driver, this);` geschiet.
-Diese vordefinierten WebElemente werden durch die Annotation `@FindBy` definiert. Das `By` ist dabei die Art der Lokalisierung also per Xpath, ClassName, id oder andere Möglichkeiten, wie es in der Dokumentation beschrieben wurde.
-Folgendes Beispiel zeigt eine Vordefinierung des Beispiels für den Login, welches sich auch in diesem Projekt befindet.
+Es wird der Driver benï¿½tigt, welches den Browser manipuliert und schon definiert und instanziert wurde, sowie mï¿½ssen die vordefinierten Webelemente initialisiert werden, was durch `PageFactory.initElements(driver, this);` geschiet.
+Diese vordefinierten WebElemente werden durch die Annotation `@FindBy` definiert. Das `By` ist dabei die Art der Lokalisierung also per Xpath, ClassName, id oder andere Mï¿½glichkeiten, wie es in der Dokumentation beschrieben wurde.
+Folgendes Beispiel zeigt eine Vordefinierung des Beispiels fï¿½r den Login, welches sich auch in diesem Projekt befindet.
 
 ```
 @FindBy(name = "e")
@@ -97,7 +99,7 @@ WebElement password;
 WebElement submit;
 ```
 
-Solche definierten Elemente können im weiteren Verlauf in Methoden verwendet werden und müssen so nur einmal definiert werden. Für das Einloggen kann so eine Methode definiert werden, welche dieses durchführt.
+Solche definierten Elemente kï¿½nnen im weiteren Verlauf in Methoden verwendet werden und mï¿½ssen so nur einmal definiert werden. Fï¿½r das Einloggen kann so eine Methode definiert werden, welche dieses durchfï¿½hrt.
 
 ```
 public void login(String loginEmail, String loginPassword) {
@@ -109,19 +111,19 @@ public void login(String loginEmail, String loginPassword) {
 }
 ```
 
-So wurden die vordefinierten Elemente in einer Methode verwendet, damit der Driver das Login-Formular ausfüllt und abschickt.
+So wurden die vordefinierten Elemente in einer Methode verwendet, damit der Driver das Login-Formular ausfï¿½llt und abschickt.
 
-Es kann jedoch nicht immer jedes Element vordefiniert werden. Es gibt Elemente, vorallen auf dynamischeren Webseiten, die initial nicht vorhanden sind und erst durch bestimmte Events erscheinen. Auch Animationen oder Änderungen brauchen eine gewisse Zeit, bis diese auf der Webseite sichtbar sind. Solche Elemente werden nicht am Anfang durch @FindBy definiert.
+Es kann jedoch nicht immer jedes Element vordefiniert werden. Es gibt Elemente, vorallen auf dynamischeren Webseiten, die initial nicht vorhanden sind und erst durch bestimmte Events erscheinen. Auch Animationen oder ï¿½nderungen brauchen eine gewisse Zeit, bis diese auf der Webseite sichtbar sind. Solche Elemente werden nicht am Anfang durch @FindBy definiert.
 
-Im Testcase cartTest, welches den Warenkorb testet wird ein Produkt zum Warenkorb hinzugefügt. Nach den Klicken des Buttons zum Hinzufügen vergehen 1-2 Sekunden, bis die Anzahl der Objekte sich im Warenkorb ändern. Um solch ein Verhalten zu implementieren, gibt es den WebDriverWait. Folgendes Beispiel lässt den Browser maximal 10 Sekunden warten, bis sich der Text in einen Element zu einen Bestimmten Wert ändert.
+Im Testcase cartTest, welches den Warenkorb testet wird ein Produkt zum Warenkorb hinzugefï¿½gt. Nach den Klicken des Buttons zum Hinzufï¿½gen vergehen 1-2 Sekunden, bis die Anzahl der Objekte sich im Warenkorb ï¿½ndern. Um solch ein Verhalten zu implementieren, gibt es den WebDriverWait. Folgendes Beispiel lï¿½sst den Browser maximal 10 Sekunden warten, bis sich der Text in einen Element zu einen Bestimmten Wert ï¿½ndert.
 ```
 /**
-* Überprüft, ob die Anzahl der Produkte im Warenkorb sich ändern
+* ï¿½berprï¿½ft, ob die Anzahl der Produkte im Warenkorb sich ï¿½ndern
 * @param amount die Amzahl der zubeinhaltenen Produkte
-* @return true wenn die Anzahl sich geändert hat, sonst false
+* @return true wenn die Anzahl sich geï¿½ndert hat, sonst false
 */
 public Boolean checkCartForHavingItems(String amount) {
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartCount, amount));
 	}
 ```
-Es gibt verschiedene ExpectedConditions, sodass für jeden Anwendungsfall etwas zu finden ist.
+Es gibt verschiedene ExpectedConditions, sodass fï¿½r jeden Anwendungsfall etwas zu finden ist.

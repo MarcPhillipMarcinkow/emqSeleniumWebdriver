@@ -23,9 +23,9 @@ public abstract class AbstractEMQ {
 	 */
 	@BeforeClass
 	public static void setDriver() {
-		ConfigDrivers conf = new ConfigDrivers();
-		driver = conf.getChrome();
-		driver.manage().window().maximize();
+		ConfigDrivers conf = new ConfigDrivers(); 
+		driver = conf.getChrome(); // Definiert GoogleChrome als Webdriver
+		driver.manage().window().maximize(); // Maximiert das Fenster des Browsers
 	}
 
 	/**
