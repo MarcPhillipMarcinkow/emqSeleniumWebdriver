@@ -58,12 +58,12 @@ public class RegistrationPage {
 	 * Füllt das Formular der Registrierung aus und sendet es ab
 	 */
 	public void fillRegistrationForm() {
-		firstName.sendKeys("Max");
-		lastName.sendKeys("Mustermann");
+		firstName.sendKeys("Hans");
+		lastName.sendKeys("Petar");
 		anredeFrau.click();
-		email.sendKeys("MaxMustermann@discardmail.com");
-		password.sendKeys("Max");
-		passwordConfirm.sendKeys("Max");
+		email.sendKeys("hans_petar@web.de");
+		password.sendKeys("123");
+		passwordConfirm.sendKeys("123");
 		submit.click();
 		submit.submit();
 	}

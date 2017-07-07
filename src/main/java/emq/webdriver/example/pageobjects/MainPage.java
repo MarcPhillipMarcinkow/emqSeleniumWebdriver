@@ -1,6 +1,7 @@
 package emq.webdriver.example.pageobjects;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +38,9 @@ public class MainPage {
 
 	@FindBy(className = "fa-user")
 	WebElement profilButton;
+	
+	@FindBy(className = "fa-pencil-square-o")
+	WebElement registrationButton;
 
 	/**
 	 * Initialisiert ein Pageobjekt der Hauptseite. Dieses beinhaltet momentan die Navigation zur Hauptseite, Buttons und die Suche
@@ -71,6 +75,21 @@ public class MainPage {
 		loginButton.click();
 	}
 
+	/**
+	 * Klickt den Registrierungsbutton
+	 */
+	public void clickRegistrationButton() {
+		registrationButton.click();
+	}
+	
+	/**
+	 * Prüft ob der Registrierungsbutton angezeigt wird
+	 */
+	public Boolean RegistrationButtonIsDisplayed() {
+		return registrationButton.isDisplayed();
+	}
+	
+	
 	/**
 	 * Gibt ein Wort in das Suchfeld ein
 	 * 

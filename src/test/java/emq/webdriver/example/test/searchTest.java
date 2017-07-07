@@ -19,6 +19,8 @@ import emq.webdriver.example.pageobjects.MainPage;
  * der Testcase mit verschiedenen Inputdaten wiederholt, die vorher definiert
  * werden
  * 
+ * Der Testcase richtet sich nach den Testcase für die Suche, dessen Ablauf im Portfolio tabellarisch abgebildet ist.
+ * 
  * @author Marc Philipp Marcinkowski
  *
  */
@@ -41,8 +43,12 @@ public class searchTest extends AbstractEMQ {
 	 */
 	@Parameters
 	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { "chili", 1 }, { "samen", 1 }, { "asdfasdf", 0 }, });
-
+		return Arrays.asList(new Object[][] { 
+			{ "chili", 1 }, // Vollständiger Suchbegriff
+			{ "sam", 1 },  // Unvollständiger Suchbegriff
+			{ "asdfasdf", 0 }, // Fehlerhafter Suchbegriff
+			{ "96", 1 } //Artikelnummer (Produkt ID) als Suchbegriff
+			});
 	}
 
 	/**

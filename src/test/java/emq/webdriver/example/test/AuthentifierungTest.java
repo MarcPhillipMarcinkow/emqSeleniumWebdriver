@@ -15,7 +15,9 @@ import emq.webdriver.example.pageobjects.RegistrationPage;
  * Desweiteren wird überprüft, ob im Profil einige Daten stimmen und ob das Verhalten im eingelogten zustand richtig ist.
  * Am Ende wird sich ausgeloggt.
  * 
- * @author Marc
+ * Der Testcase richtet sich nach den beiden Testcases für die Registrierung und Login, dessen Ablauf im Portfolio tabellarisch abgebildet ist.
+ * 
+ * @author Marc Philipp Marcinkowski
  *
  */
 public class AuthentifierungTest extends AbstractEMQ {
@@ -31,17 +33,17 @@ public class AuthentifierungTest extends AbstractEMQ {
 	//@Test
 	public void registrationTest() {
 		mp.openPage();
-
+		mp.clickRegistrationButton();
 		RegistrationPage reg = new RegistrationPage(driver);
-		reg.openPage();
+		
 		reg.fillRegistrationForm();
 	}
 
 	@Test
 	public void loginTest() {
 		
-		String emailAdresse = "MaxMustermann@discardmail.com";
-		String password = "Max";
+		String emailAdresse = "hans_petar@web.de";
+		String password = "123";
 		
 		//öffnet die Startseite
 		mp.openPage();
@@ -58,14 +60,14 @@ public class AuthentifierungTest extends AbstractEMQ {
 
 		logger.info("Login mit ungültigen Daten");
 		login.login("asdf", "aas2fds");
-		logger.info("Überprüfe ob in der Loginmaske der Error ein Error erscheint");
+		logger.info("Überprüfe ob in der Loginmaske ein Error erscheint");
 		Assert.assertTrue(login.getDangerAlertMessage().contains("Ungültige Zugangsdaten."));
-
+		logger.info("Errornachricht ist: "+login.getDangerAlertMessage());
 		/**
 		 * Login mit richtigen Daten
 		 */
 
-		logger.info("Login mit ungültigen Daten");
+		logger.info("Login mit gültigen Daten");
 		login.login(emailAdresse, password);
 
 		

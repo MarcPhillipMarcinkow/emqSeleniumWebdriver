@@ -10,6 +10,9 @@ import emq.webdriver.example.pageobjects.ProductPage;
 /**
  * Dieser Test testet den Warenkorb. Dabei wird ein Produkt zum Warenkorb hinzugefügt und das richtige Verhalten der Seite überprüft.
  * Es wird auch die Anzahl geändert, sowie das Produkt aus dem Warenkorb entfernt.
+ * 
+ *  * Der Testcase richtet sich nach den  Testcase für den Bestellvorgang, dessen Ablauf im Portfolio tabellarisch abgebildet ist.
+ * 
  * @author Marc Philipp Marcinkowski
  *
  */
@@ -29,7 +32,7 @@ private Logger logger = Logger.getLogger(this.getClass().getName());
 		logger.info("Navigiere zur Hauptseite");
 		mp.openPage();
 		
-		logger.info("Öffne die Produktseite");
+		logger.info("Öffne die Produktseite für das Produkt mit der ID: " +productId);
 		pp.openProductPage(productId);
 		
 		logger.info("Überprüfe das der Warenkorb leer ist");
@@ -51,10 +54,9 @@ private Logger logger = Logger.getLogger(this.getClass().getName());
 		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 2 ist");
 		Assert.assertTrue(pp.checkCartForHavingItems("2"));
 		
+		logger.info("Klick den Delete-Button");
 		pp.clickDeleteButton();
 		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 0 ist");
-		Assert.assertTrue(pp.checkCartForHavingItems("0"));
-			
+		Assert.assertTrue(pp.checkCartForHavingItems("0"));		
 	}
-
 }
