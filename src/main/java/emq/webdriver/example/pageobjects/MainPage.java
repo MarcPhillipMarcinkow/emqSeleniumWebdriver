@@ -41,6 +41,9 @@ public class MainPage {
 	
 	@FindBy(className = "fa-pencil-square-o")
 	WebElement registrationButton;
+	
+	@FindBy(className = "deleteSymbol")
+	WebElement deleteSearchButton;
 
 	/**
 	 * Initialisiert ein Pageobjekt der Hauptseite. Dieses beinhaltet momentan die Navigation zur Hauptseite, Buttons und die Suche
@@ -138,5 +141,28 @@ public class MainPage {
 		 * Wartet maximal 10 Sekunden bis der logoutButton klickbar ist. Wenn er klickbar ist wird er geklickt.
 		 */
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+	}
+	
+	/**
+	 * Überprüft ob der Button zum Löschen des Suchbegriffs angezeigt wird
+	 * @return true falls angezeigt, sonst false
+	 */
+	public Boolean deleteSearchButtonIsDisplayed(){
+		return (new WebDriverWait(driver, 15)).until(ExpectedConditions.visibilityOf(deleteSearchButton)).isDisplayed();
+	}
+	
+	/**
+	 * Klickt den Button zum löschen des aktuellen Suchbegriffs
+	 */
+	public void clickDeleteSearchButton() {
+		deleteSearchButton.click();
+	}
+	
+	/**
+	 * Überprüft ob das Suchfeld leer ist
+	 * @return true, falls leer sonst false
+	 */
+	public Boolean SearchfieldIsEmpty() {
+		return searchField.getText().isEmpty();
 	}
 }

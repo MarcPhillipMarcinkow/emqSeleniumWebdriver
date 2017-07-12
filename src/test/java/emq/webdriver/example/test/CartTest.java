@@ -25,18 +25,26 @@ private Logger logger = Logger.getLogger(this.getClass().getName());
 		
 		String menge = "2 Stück";
 		String productId = "96";
+		Double product1Prize;
+		
 		
 		MainPage mp = new MainPage(driver);
 		ProductPage pp = new ProductPage(driver);
 		
 		logger.info("Navigiere zur Hauptseite");
 		mp.openPage();
-		
+
 		logger.info("Öffne die Produktseite für das Produkt mit der ID: " +productId);
 		pp.openProductPage(productId);
 		
+		logger.info("Überprüfe Initial-Zustand des Warenkorbs");
+		
 		logger.info("Überprüfe das der Warenkorb leer ist");
 		Assert.assertTrue(pp.getCartCount() == 0);
+		
+		logger.info("Überprüfe ob die Summe 0 ist");
+		Assert.assertTrue(pp.getCartSum() == 0);
+		
 		
 		logger.info("Füge das Produkt zum Warenkorb hinzu");
 		pp.addToCart();
@@ -46,17 +54,41 @@ private Logger logger = Logger.getLogger(this.getClass().getName());
 		logger.info("Produkt wurde hinzugefügt");
 		
 		logger.info("Vergleiche die Summe des Warenkorbs mit dem Artikelpreis");
-		Assert.assertTrue(pp.expectCartSumToBe(pp.getSellPrice()));
+		Assert.assertTrue(pp.expectCartSumToBe(pp.getSellPriceAsString()));
 		
-		logger.info("Ändere die Menge auf " +menge);
-		pp.setAmount(menge);
-		pp.clickChangeAmountButton();
-		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 2 ist");
-		Assert.assertTrue(pp.checkCartForHavingItems("2"));
+		product1Prize = pp.getSellPriceAsDouble();
 		
 		logger.info("Klick den Delete-Button");
 		pp.clickDeleteButton();
 		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 0 ist");
-		Assert.assertTrue(pp.checkCartForHavingItems("0"));		
+		Assert.assertTrue(pp.checkCartForHavingItems("0"));	
+		
+		logger.info("Füge das Produkt zum Warenkorb hinzu");
+		pp.addToCart();
+		
+		logger.info("Überprüfe ob die Anzahl im Warenkorb wieder 1 ist");
+		Assert.assertTrue(pp.checkCartForHavingItems("1"));
+		
+		logger.info("Ändere die Menge auf " +menge);
+		pp.setAmount(menge);
+		
+		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 2 ist");
+		Assert.assertTrue(pp.checkCartForHavingItems("2"));
+		
+		logger.info("Überprüfe ob die Summe richtig angepasst wurde");
+		Assert.assertTrue(pp.getCartSum() == product1Prize*2);
+		
+		logger.info("Ändere die Menge auf 3 Stück");
+		pp.setAmount("3 Stück");
+		
+		logger.info("Überprüfe ob die Anzahl im Warenkorb nun 3 ist");
+		Assert.assertTrue(pp.checkCartForHavingItems("3"));
+		
+		logger.info("Überprüfe ob die Summe richtig angepasst wurde");
+	 //   Assert.assertTrue("Erwartete Summe :" +Math.round((product1Prize*3)*10000.0D/10000.0D) +" Summe des Warenkorbs :"+pp.getCartSum(), pp.getCartSum() - (product1Prize*3) == 0);
+	//	Assert.assertEquals((product1Prize*3), pp.getCartSum(),0);
+		
+		
+		
 	}
 }

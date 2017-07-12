@@ -36,9 +36,6 @@ public class ProductPage  {
 	@FindBy(id = "amount")
 	WebElement productAmount;
 
-	@FindBy(id = "changeAmountButton")
-	WebElement changeAmountButton;
-
 	@FindBy(className = "delete")
 	WebElement deleteButton;
 	
@@ -82,6 +79,16 @@ public class ProductPage  {
 	public Boolean expectCartSumToBe(String expectedSum) {
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartSum, expectedSum));
 	}
+	
+	/**
+	 * Gibt die Summe des Warenkorbs als float zurück
+	 * @return Summe des Warenkorbs als float
+	 */
+	public Double getCartSum() {
+		Double sum = Double.parseDouble(cartSum.getText().substring(2).replace(",", "."));
+		logger.info("Aktuelle Summe im Warenkorb: "+ sum);
+		return sum;
+	}
 
 
 	/**
@@ -92,7 +99,7 @@ public class ProductPage  {
 	 * @return true wenn die Anzahl sich geändert hat, sonst false
 	 */
 	public Boolean checkCartForHavingItems(String amount) {
-		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.textToBePresentInElement(cartCount, amount));
+		return (new WebDriverWait(driver, 20)).until(ExpectedConditions.textToBePresentInElement(cartCount, amount));
 	}
 
 	
@@ -101,10 +108,18 @@ public class ProductPage  {
 	 * 
 	 * @return Der Preis des Produkts
 	 */
-	public String getSellPrice() {
+	public String getSellPriceAsString() {
 		return salePrice.getText();
 	}
-
+	
+	/**
+	 * Bekomme den Preis des Produktes
+	 * 
+	 * @return Der Preis des Produkts
+	 */
+	public Double getSellPriceAsDouble() {
+		return Double.parseDouble(salePrice.getText().substring(2).replace(",", "."));
+	}
 
 	/**
 	 * Bekomme die Anzahl der Produkte, die im Warenkorb sind
@@ -127,13 +142,6 @@ public class ProductPage  {
 		select.selectByVisibleText(value);
 	}
 
-	/**
-	 * Klickt auf den Refresh-Button, um die Änderung der Menge anzustoßen
-	 */
-	public void clickChangeAmountButton() {
-		logger.info("Klicke den Button zum Ändern der Anzahl");
-		changeAmountButton.click();
-	}
 
 	/**
 	 * Klickt auf den Delete-Button, um das Produkt aus dem Warenkorb zu nehmen
@@ -142,4 +150,8 @@ public class ProductPage  {
 		logger.info("Klicke den delete Button");
 		deleteButton.click();
 	}
+	
+	/**
+	 * Bekomme die Summe aus dem Warenkorb
+	 */
 }

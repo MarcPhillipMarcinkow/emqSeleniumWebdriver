@@ -1,5 +1,7 @@
 package emq.webdriver.example.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -45,7 +47,7 @@ public class searchTest extends AbstractEMQ {
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][] { 
 			{ "chili", 1 }, // Vollständiger Suchbegriff
-			{ "sam", 1 },  // Unvollständiger Suchbegriff
+			{ "chi", 1 },  // Unvollständiger Suchbegriff
 			{ "asdfasdf", 0 }, // Fehlerhafter Suchbegriff
 			{ "96", 1 } //Artikelnummer (Produkt ID) als Suchbegriff
 			});
@@ -81,7 +83,9 @@ public class searchTest extends AbstractEMQ {
 	 */
 	@Test
 	public void SearchTest() {
+		logger.info("Suchtest für: " + searchkeyword);
 		mp.enterKeywordInSearchfield(searchkeyword);
+		logger.info("Warte auf Suchergebnisse");
 		mp.waitForSearchResults();
 
 		/*
@@ -99,5 +103,12 @@ public class searchTest extends AbstractEMQ {
 			Assert.assertTrue(mp.getResultsCount() == 0);
 			logger.info("Suchtest für: " + searchkeyword + " erfolgreich");
 		}
+		
+		logger.info("Klicke den Resetbutton für die Suche");
+		assertTrue(mp.deleteSearchButtonIsDisplayed());
+		mp.clickDeleteSearchButton();
+		logger.info("Überprüfe ob das Suchfeld leer ist");
+		Assert.assertTrue(mp.SearchfieldIsEmpty());
+		
 	}
 }
